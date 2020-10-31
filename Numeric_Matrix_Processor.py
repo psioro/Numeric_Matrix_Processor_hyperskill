@@ -1,17 +1,12 @@
 import copy
 from math import pow
 
-def get_matrix_NEW(ident=""):
+
+def get_matrix(ident=""):
     dim = [int(x) for x in input(f"Enter size of {ident} matrix: ").split()]
     print(f"Enter {ident} matrix")
     matrix = []
     for _ in range(dim[0]):
-        matrix.append([float(x) for x in input().split()])
-    return matrix
-
-def get_matrix(dim):
-    matrix = []
-    for _ in range(dim):
         matrix.append([float(x) for x in input().split()])
     return matrix
 
@@ -21,6 +16,7 @@ def print_matrix(mx):
         for j in range(len(mx[0])):
             print(mx[i][j], end=" ")
         print()
+    print()
 
 
 def add_matrix(mx1, mx2):
@@ -130,96 +126,70 @@ def inverse(mx):
 
 while True:
     print("1. Add matrices\n2. Multiply matrix by a constant\n3. Multiply matrices"
-          "4. Transpose matrix\n5. Calculate a determinant\n6. Inverse matrix\n0. Exit")
+          "\n4. Transpose matrix\n5. Calculate a determinant\n6. Inverse matrix\n0. Exit")
     command = int(input("Your choice: "))
     if command == 0:
         break
     elif command == 1:
         # add matrices
-        #dim1 = [int(x) for x in input("Enter size of first matrix: ").split()]
-        #print("Enter first matrix: ")
-        #matrix1 = get_matrix(dim1[0])
-        matrix1 = get_matrix_NEW("first")
-        matrix2 = get_matrix_NEW("second")
-
-        #dim2 = [int(x) for x in input("Enter size of second matrix: ").split()]
-        #print("Enter second matrix: ")
-        #matrix2 = get_matrix(dim2[0])
+        matrix1 = get_matrix("first")
+        matrix2 = get_matrix("second")
         if len(matrix1) == len(matrix2) and len(matrix1[0]) == len(matrix2[0]):
             print("The result is: ")
             print_matrix(add_matrix(matrix1, matrix2))
         else:
             print("The operation cannot be performed.\n")
         del (matrix1, matrix2)
-        #del (dim1, dim2, matrix1, matrix2)
     elif command == 2:
         # multiply matrices by constant
-        dim1 = [int(x) for x in input("Enter size of the matrix: ").split()]
-        print("Enter matrix:")
-        matrix1 = get_matrix(dim1[0])
+        matrix1 = get_matrix("the")
         constant = float(input("Enter constant: "))
         print("The result is:")
         print_matrix(multiply_matrix_by_constant(matrix1, constant))
-        del (dim1, matrix1, constant)
+        del (matrix1, constant)
     elif command == 3:
         # multiply matrices
-        dim1 = [int(x) for x in input("Enter size of first matrix: ").split()]
-        print("Enter first matrix:")
-        matrix1 = get_matrix(dim1[0])
-        dim2 = [int(x) for x in input("Enter size of second matrix: ").split()]
-        print("Enter second matrix: ")
-        matrix2 = get_matrix(dim2[0])
+        matrix1 = get_matrix("first")
+        matrix2 = get_matrix("second")
         print("The result is: ")
         print_matrix(multiply_matrices_new(matrix1, matrix2))
-        del (dim1, dim2, matrix1, matrix2)
+        del (matrix1, matrix2)
     elif command == 4:
         # transpose matrices
         print("1. Main diagonal\n2. Side diagonal\n3. Vertical line\n4. Horizontal line")
         command_transpose = int(input("Your choice: "))
         if command_transpose == 1:
             # Transpose along main diagonal
-            dim1 = [int(x) for x in input("Enter matrix size: ").split()]
-            print("Enter matrix:")
-            matrix1 = get_matrix(dim1[0])
+            matrix1 = get_matrix()
             print("The result is:")
             print_matrix(transpose_diag_main(matrix1))
-            del (dim1, matrix1)
+            del matrix1
         elif command_transpose == 2:
             # Transpose along side diagonal
-            dim1 = [int(x) for x in input("Enter matrix size: ").split()]
-            print("Enter matrix:")
-            matrix1 = get_matrix(dim1[0])
+            matrix1 = get_matrix()
             print("The result is:")
             print_matrix(transpose_vertical(transpose_horizontal(transpose_diag_main(matrix1))))
-            del (dim1, matrix1)
+            del matrix1
         elif command_transpose == 3:
             # Vertical transpose
-            dim1 = [int(x) for x in input("Enter matrix size: ").split()]
-            print("Enter matrix:")
-            matrix1 = get_matrix(dim1[0])
+            matrix1 = get_matrix()
             print("The result is:")
             print_matrix(transpose_vertical(matrix1))
-            del (dim1, matrix1)
+            del matrix1
         elif command_transpose == 4:
             # Horizontal transpose
-            dim1 = [int(x) for x in input("Enter matrix size: ").split()]
-            print("Enter matrix:")
-            matrix1 = get_matrix(dim1[0])
+            matrix1 = get_matrix()
             print("The result is:")
             print_matrix(transpose_horizontal(matrix1))
-            del (dim1, matrix1)
+            del matrix1
     elif command == 5:
         # Calculate determinant
-        dim1 = [int(x) for x in input("Enter matrix size: ").split()]
-        print("Enter matrix:")
-        matrix1 = get_matrix(dim1[0])
+        matrix1 = get_matrix()
         print("The result is: \n", determinant(matrix1), sep="", end="\n\n")
-        del (dim1, matrix1)
+        del matrix1
     elif command == 6:
         # Calculate inverse of matrix
-        dim1 = [int(x) for x in input("Enter matrix size: ").split()]
-        print("Enter matrix:")
-        matrix1 = get_matrix(dim1[0])
+        matrix1 = get_matrix()
         print("The result is:")
         print_matrix(inverse(matrix1))
-        del (dim1, matrix1)
+        del matrix1
