@@ -53,7 +53,7 @@ def zero_matrix(rows, cols):
     return M
 
 
-def multiply_matrices_new(mx1, mx2):
+def multiply_matrices(mx1, mx2):
     if len(mx1[0]) == len(mx2):
         result = zero_matrix(len(mx1), len(mx2[0]))
         for i in range(len(mx1)):
@@ -152,7 +152,7 @@ while True:
         matrix1 = get_matrix("first")
         matrix2 = get_matrix("second")
         print("The result is: ")
-        print_matrix(multiply_matrices_new(matrix1, matrix2))
+        print_matrix(multiply_matrices(matrix1, matrix2))
         del (matrix1, matrix2)
     elif command == 4:
         # transpose matrices
